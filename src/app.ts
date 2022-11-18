@@ -63,10 +63,43 @@ function calcTotalPages(): void {
     console.log(r);
 }
 
+function createCustomerID(name: string, id: number): string {
+    return `${id}/${name}`;
+}
+
+function createCustomer(name: string, age?: number, city?: string): void {
+    console.log(`Customer name: ${name}`);
+
+    if (age) {
+        console.log(`Customer age: ${age}`);
+    }
+
+    if (city) {
+        console.log(`Customer city: ${city}`);
+    }
+}
+
 // ===========================================================
 // Task 02.01
 // console.log(getAllBooks());
 // logFirstAvailable(getAllBooks());
 // logBookTitles(getBookTitlesByCategory(Category.CSS));
-console.log(getBookAuthorByIndex(0));
-calcTotalPages();
+// console.log(getBookAuthorByIndex(0));
+// calcTotalPages();
+
+// Task 03.01
+// const myID: string = createCustomerID('Ann', 10);
+// console.log(myID);
+
+// let idGenerator: (name: string, id: number) => string;
+// let idGenerator: typeof createCustomerID;
+// idGenerator = (name: string, id: number) =>`${id}/${name}`;
+// idGenerator = createCustomerID;
+
+// const a = typeof createCustomerID;
+// console.log(idGenerator('Boris', 20));
+
+// Task 03.02
+createCustomer('Anna');
+createCustomer('Anna', 30);
+createCustomer('Anna', 30, 'Kyiv');
