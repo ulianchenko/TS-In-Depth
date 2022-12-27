@@ -1,9 +1,10 @@
 /* eslint-disable no-redeclare */
 
-import { ReferenceItem } from './classes';
+import { ReferenceItem, UL, RefBook} from './classes';
 import { Category } from './enums';
-import { calcTotalPages, getAllBooks, getBookAuthorByIndex, getBookTitlesByCategory, logBookTitles, logFirstAvailable, setDefaultConfig } from './functions';
-import { Logger, TOptions } from './interfaces';
+import { purge, printRefBook, calcTotalPages, getAllBooks, getBookAuthorByIndex, getBookTitlesByCategory, logBookTitles, logFirstAvailable, setDefaultConfig } from './functions';
+import { Book, Librarian, Logger, TOptions } from './interfaces';
+import { Library } from './classes/library';
 
 showHello('greeting', 'TypeScript');
 
@@ -13,25 +14,6 @@ function showHello(divName: string, name: string) {
 }
 
 // ===========================================================
-class Encyclopedia extends ReferenceItem {
-    constructor(
-        id: number,
-        title: string,
-        year: number,
-        public edition: number
-    ) {
-        super(id, title, year);
-    }
-
-    override printItem(): void {
-        super.printItem();
-        console.log(`Edition: ${this.edition} (${this.year})`);
-    }
-
-    printCitation(): void {
-        console.log(`${this.title} - ${this.year}`);
-    }
-}
 
 // ===========================================================
 // Task 02.01
@@ -99,8 +81,8 @@ class Encyclopedia extends ReferenceItem {
 
 // Task 04.02
 // const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
-const logDamage: Logger = (reason: string) => console.log(`Damaged: ${reason}`);
-logDamage('missing back cover');
+// const logDamage: Logger = (reason: string) => console.log(`Damaged: ${reason}`);
+// logDamage('missing back cover');
 
 // Task 04.03
 // const favoriteAuthor: Author = {
@@ -143,13 +125,14 @@ logDamage('missing back cover');
 
 // Task 05.02, 05.03
 // const refBook: Encyclopedia = new Encyclopedia(1,'Learn TypeScript', 2022, 2);
+// const refBook: RefBook = new RefBook(1,'Learn TypeScript', 2022, 2);
 // refBook.printItem();
 // console.log(refBook);
 // console.log(refBook.getID());
 // refBook.printCitation();
 
 // Task 05.04
-// const favoriteLibrarian: Librarian = new UniversityLibrarian();
+// const favoriteLibrarian: Librarian = new UL.UniversityLibrarian();
 // favoriteLibrarian.name = 'Anna';
 // favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
 // favoriteLibrarian.a = 2;
@@ -165,8 +148,56 @@ logDamage('missing back cover');
 //     title: 'Unknown'
 // };
 
-const options: TOptions = {duration: 20};
-const options2 = setDefaultConfig(options);
-console.log(options);
-console.log(options2);
-console.log(Object.is(options, options2));
+// const options: TOptions = {duration: 20};
+// const options2 = setDefaultConfig(options);
+// console.log(options);
+// console.log(options2);
+// console.log(Object.is(options, options2));
+
+
+// Task 06.03, 06.04
+// const refBook: RefBook = new RefBook(1,'Learn TypeScript', 2022, 2);
+// printRefBook(refBook);
+
+// const favoriteLibrarian: Librarian = new UL.UniversityLibrarian();
+// printRefBook(favoriteLibrarian);
+
+// Task 06.05
+// const flag = true;
+// if (flag) {
+//     import('./classes')
+//         .then(o => {
+//             const reader = new o.Reader();
+//             reader.name = 'Anna';
+//             reader.take(getAllBooks()[0]);
+//         })
+//         .catch(err => console.log(err))
+//         .finally(() => console.log('Complete!'));
+// }
+
+// if (flag) {
+//     const o = await import('./classes');
+//     const reader = new o.Reader();
+//     reader.name = 'Anna';
+//     reader.take(getAllBooks()[0]);
+//     console.log(reader);
+// }
+
+// Task 06.06
+// const library: Library = {
+//     id: 1,
+//     address: '',
+//     name: 'Anna'
+// };
+
+// Task 07.01
+const inventory: Book[] = [
+    { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software },
+    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+];
+const result1 = purge(inventory);
+console.log(result1);
+const result2 = purge([1, 2, 3]);
+console.log(result2);
