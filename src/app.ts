@@ -1,9 +1,9 @@
 /* eslint-disable no-redeclare */
 
-import { ReferenceItem, UL, RefBook} from './classes';
+import { ReferenceItem, UL, RefBook, Shelf } from './classes';
 import { Category } from './enums';
-import { purge, printRefBook, calcTotalPages, getAllBooks, getBookAuthorByIndex, getBookTitlesByCategory, logBookTitles, logFirstAvailable, setDefaultConfig } from './functions';
-import { Book, Librarian, Logger, TOptions } from './interfaces';
+import { getObjectProperty, purge, printRefBook, calcTotalPages, getAllBooks, getBookAuthorByIndex, getBookTitlesByCategory, logBookTitles, logFirstAvailable, setDefaultConfig } from './functions';
+import { Book, Librarian, Logger, TOptions, Magazine } from './interfaces';
 import { Library } from './classes/library';
 
 showHello('greeting', 'TypeScript');
@@ -197,7 +197,29 @@ const inventory: Book[] = [
     { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
     { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
 ];
-const result1 = purge(inventory);
-console.log(result1);
-const result2 = purge([1, 2, 3]);
-console.log(result2);
+// const result1 = purge(inventory);
+// console.log(result1);
+// const result2 = purge([1, 2, 3]);
+// console.log(result2);
+
+// Task 07.02, 07.03
+// const bookShelf: Shelf<Book> = new Shelf<Book>();
+// const bookShelf = new Shelf<Book>();
+// inventory.forEach(book => bookShelf.add(book));
+// console.log(bookShelf.getFirst().title);
+
+const magazines: Magazine[] =
+[
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' }
+];
+// const magazineShelf = new Shelf<Magazine>();
+// magazines.forEach(mag => magazineShelf.add(mag));
+// console.log(magazineShelf.getFirst().title);
+
+// magazineShelf.printTitles();
+// console.log(magazineShelf.find('Five Points'));
+
+console.log(getObjectProperty(magazines[0], 'title'));
+console.log(getObjectProperty<Book, 'author' | 'title'>(inventory[1], 'author'));
