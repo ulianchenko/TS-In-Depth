@@ -2,7 +2,7 @@
 
 import { ReferenceItem, UL, RefBook, Shelf } from './classes';
 import { Category } from './enums';
-import { getObjectProperty, purge, printRefBook, calcTotalPages, getAllBooks, getBookAuthorByIndex, getBookTitlesByCategory, logBookTitles, logFirstAvailable, setDefaultConfig, createCustomer } from './functions';
+import { getObjectProperty, purge, printRefBook, calcTotalPages, getAllBooks, getBookAuthorByIndex, getBookTitlesByCategory, logBookTitles, logFirstAvailable, setDefaultConfig, createCustomer, getBooksByCategory, logCategorySearch, getBooksByCategoryPromise, logSearchResults } from './functions';
 import { Book, Librarian, Logger, TOptions, Magazine } from './interfaces';
 import { Library } from './classes/library';
 import { BookRequiredFields, UpdatedBook, СreateCustomerFunctionType } from './types';
@@ -265,7 +265,53 @@ function showHello(divName: string, name: string) {
 // refBook.printItem();
 
 // Task 08.05
-const favoriteLibrarian = new UL.UniversityLibrarian();
-console.log(favoriteLibrarian);
-favoriteLibrarian.name = 'Anna';
-favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// console.log(favoriteLibrarian);
+// favoriteLibrarian.name = 'Anna';
+// favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+
+// Task 08.06
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// favoriteLibrarian.name = 'Anna';
+// console.log(favoriteLibrarian.name);
+// favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+// console.log(favoriteLibrarian);
+
+// Task 08.07
+// const refBook: RefBook = new RefBook(1,'Learn TypeScript', 2022, 2);
+// refBook.copies = 10;
+// // refBook.copies = -10;
+// console.log(refBook.copies);
+
+
+// Task 09.01
+// console.log('Begin');
+// getBooksByCategory(Category.JavaScript, logCategorySearch);
+// getBooksByCategory(Category.Software, logCategorySearch);
+// console.log('End');
+
+
+// Task 09.02
+// console.log('Begin');
+// getBooksByCategoryPromise(Category.JavaScript)
+//     .then(titles => {
+//         console.log(titles);
+//         // return titles.length;
+//         // return Promise.resolve(titles.length);
+//         return new Promise((resolve, reject) => {
+//             resolve(titles.length + 100);
+//         });
+//     })
+//     .then(n => console.log(n))
+//     .catch(reason => console.log(reason));
+// getBooksByCategoryPromise(Category.Software)
+//     .then(titles => console.log(titles))
+//     .catch(reason => console.log(reason));
+// console.log('End');
+
+
+// Task 09.03
+// console.log('Begin');
+logSearchResults(Category.JavaScript);
+logSearchResults(Category.Software).catch(err => console.log(err));
+// console.log('End');
